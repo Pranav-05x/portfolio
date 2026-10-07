@@ -1,26 +1,19 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+html { scroll-behavior: smooth; }
+body { background: #0A0E13; color: #E9E6DF; }
+::selection { background: #C8B27A; color: #0A0E13; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; } html { scroll-behavior: auto; } }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.show { opacity: 1; transform: none; }
+@keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(40px,-30px); } }
+.float { animation: float 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .float { animation: none; } }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 28s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
